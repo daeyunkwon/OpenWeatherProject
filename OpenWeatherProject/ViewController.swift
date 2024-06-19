@@ -142,8 +142,6 @@ final class ViewController: UIViewController {
         setupCLLoacationManager()
         configureLayout()
         configureUI()
-        
-        self.locationManager.startUpdatingLocation()
     }
     
     private func configureLayout() {
@@ -264,9 +262,49 @@ final class ViewController: UIViewController {
     //MARK: - Functions
     
     private func setupCLLoacationManager() {
-        locationManager.requestWhenInUseAuthorization()
-        
         locationManager.delegate = self
+    }
+    
+    private func checkDeviceLocationAuthorization() {
+        DispatchQueue.global().async {
+            if CLLocationManager.locationServicesEnabled() {
+                let status = self.locationManager.authorizationStatus
+                DispatchQueue.main.async {
+                    self.checkStatusLocationAuthorization(status: status)
+                }
+                
+            } else {
+                DispatchQueue.main.async {
+                    self.showLocationServiceFailAlert()
+                }
+            }
+        }
+        
+    }
+    
+    private func checkStatusLocationAuthorization(status: CLAuthorizationStatus) {
+        switch status {
+        case .notDetermined:
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.requestWhenInUseAuthorization()
+        case .denied:
+            self.showLocationServiceFailAlert()
+        case .authorizedWhenInUse:
+            locationManager.startUpdatingLocation()
+        default:
+            print("Error: ", #function)
+        }
+    }
+    
+    private func showLocationServiceFailAlert() {
+        let alert = UIAlertController(title: "위치 정보 이용", message: "위치 서비스를 사용할 수 없습니다. 기기의 '설정 > 개인정보 보호'에서 위치 서비스를 켜주세요.(필수권한)", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "취소", style: .cancel))
+        alert.addAction(UIAlertAction(title: "설정으로 이동", style: .default, handler: { goSettingAction in
+            if let settingURL = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(settingURL)
+            }
+        }))
+        present(alert, animated: true)
     }
     
     private func callRequest(lat: Double, lon: Double) {
@@ -306,7 +344,7 @@ final class ViewController: UIViewController {
     }
     
     @objc func refreshButtonTapped() {
-        self.locationManager.startUpdatingLocation()
+        checkDeviceLocationAuthorization()
     }
 }
 
@@ -346,6 +384,10 @@ extension ViewController: CLLocationManagerDelegate {
                 self.locationLabel.text = reform
             }
         })
+    }
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        self.checkDeviceLocationAuthorization()
     }
 }
 

@@ -18,7 +18,6 @@ final class ViewController: UIViewController {
     
     let locationManager = CLLocationManager()
     
-    
     //MARK: - UI Components
     
     private let mainBackImageView: UIImageView = {
@@ -144,9 +143,7 @@ final class ViewController: UIViewController {
         configureLayout()
         configureUI()
         
-        DispatchQueue.main.asyncAfter(deadline: .now()+2.0, execute: {
-            self.locationManager.requestLocation()
-        })
+        self.locationManager.startUpdatingLocation()
     }
     
     private func configureLayout() {
@@ -309,7 +306,7 @@ final class ViewController: UIViewController {
     }
     
     @objc func refreshButtonTapped() {
-        self.locationManager.requestLocation()
+        self.locationManager.startUpdatingLocation()
     }
 }
 
@@ -320,7 +317,7 @@ extension ViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let lat = locations.last?.coordinate.latitude else {return}
         guard let lon = locations.last?.coordinate.longitude else {return}
-        
+        locationManager.stopUpdatingLocation()
         callRequest(lat: lat, lon: lon)
         findAddr(lat: lat, long: lon)
     }

@@ -144,6 +144,10 @@ final class ViewController: UIViewController {
         configureUI()
     }
     
+    private func setupCLLoacationManager() {
+        locationManager.delegate = self
+    }
+    
     private func configureLayout() {
         view.addSubview(mainBackImageView)
         mainBackImageView.snp.makeConstraints { make in
@@ -261,8 +265,14 @@ final class ViewController: UIViewController {
     
     //MARK: - Functions
     
-    private func setupCLLoacationManager() {
-        locationManager.delegate = self
+    private func changeDisplayLocationIcon(isActive: Bool) {
+        if isActive {
+            self.locationIcon.image = UIImage(systemName: "location.fill")
+            self.locationIcon.tintColor = .systemBlue
+        } else {
+            self.locationIcon.image = UIImage(systemName: "location")
+            self.locationIcon.tintColor = .white
+        }
     }
     
     private func checkDeviceLocationAuthorization() {
@@ -270,6 +280,7 @@ final class ViewController: UIViewController {
             if CLLocationManager.locationServicesEnabled() {
                 let status = self.locationManager.authorizationStatus
                 DispatchQueue.main.async {
+                    self.changeDisplayLocationIcon(isActive: true)
                     self.checkStatusLocationAuthorization(status: status)
                 }
                 
@@ -313,6 +324,10 @@ final class ViewController: UIViewController {
             switch response.result {
             case .success(let data):
                 self.updateUIWithData(data: data)
+                DispatchQueue.main.asyncAfter(deadline: .now()+1.0, execute: DispatchWorkItem(block: {
+                    self.changeDisplayLocationIcon(isActive: false)
+                }))
+                
             case .failure(let error):
                 print(error)
             }

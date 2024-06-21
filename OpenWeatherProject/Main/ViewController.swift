@@ -8,7 +8,6 @@
 import UIKit
 import CoreLocation
 
-import Alamofire
 import Kingfisher
 import SnapKit
 

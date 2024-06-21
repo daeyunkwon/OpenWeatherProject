@@ -18,6 +18,7 @@
 		4411F09A2C11678800878AFE /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 4411F0992C11678800878AFE /* Alamofire */; };
 		4411F09C2C12F61600878AFE /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4411F09B2C12F61600878AFE /* Weather.swift */; };
 		4411F09F2C13061B00878AFE /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 4411F09E2C13061B00878AFE /* Kingfisher */; };
+		443A3E202C2565E700C426FD /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3E1F2C2565E700C426FD /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		4411F0912C11653500878AFE /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		4411F0932C1165B100878AFE /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		4411F09B2C12F61600878AFE /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		443A3E1F2C2565E700C426FD /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				4411F0932C1165B100878AFE /* APIKey.swift */,
+				443A3E1F2C2565E700C426FD /* NetworkManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -200,6 +203,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				443A3E202C2565E700C426FD /* NetworkManager.swift in Sources */,
 				4411F0822C11649600878AFE /* ViewController.swift in Sources */,
 				4411F07E2C11649600878AFE /* AppDelegate.swift in Sources */,
 				4411F0942C1165B100878AFE /* APIKey.swift in Sources */,

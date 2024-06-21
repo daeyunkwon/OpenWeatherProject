@@ -318,22 +318,6 @@ final class ViewController: UIViewController {
         present(alert, animated: true)
     }
     
-    private func callRequest(lat: Double, lon: Double) {
-        let url = APIURL.url(lat: lat, lon: lon)
-        AF.request(url).responseDecodable(of: WeatherData.self) { response in
-            switch response.result {
-            case .success(let data):
-                self.updateUIWithData(data: data)
-                DispatchQueue.main.asyncAfter(deadline: .now()+1.0, execute: DispatchWorkItem(block: {
-                    self.changeDisplayLocationIcon(isActive: false)
-                }))
-                
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    
     private func updateUIWithData(data: WeatherData) {
         guard let temp = data.main?.temp else {return}
         guard let wind = data.wind?.speed else {return}
@@ -371,7 +355,12 @@ extension ViewController: CLLocationManagerDelegate {
         guard let lat = locations.last?.coordinate.latitude else {return}
         guard let lon = locations.last?.coordinate.longitude else {return}
         locationManager.stopUpdatingLocation()
-        callRequest(lat: lat, lon: lon)
+        NetworkManager.shared.fetchWeatherData(lat: lat, lon: lon) { data in
+            self.updateUIWithData(data: data)
+            DispatchQueue.main.asyncAfter(deadline: .now()+1.0, execute: DispatchWorkItem(block: {
+                self.changeDisplayLocationIcon(isActive: false)
+            }))
+        }
         findAddr(lat: lat, long: lon)
     }
     

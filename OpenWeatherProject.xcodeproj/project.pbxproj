@@ -67,16 +67,56 @@
 		4411F07C2C11649600878AFE /* OpenWeatherProject */ = {
 			isa = PBXGroup;
 			children = (
+				443A3E1C2C25655D00C426FD /* Application */,
+				443A3E1B2C25655000C426FD /* Utils */,
+				443A3E1A2C25654600C426FD /* Model */,
+				443A3E1D2C25656D00C426FD /* Main */,
+				443A3E1E2C25657E00C426FD /* Resource */,
+			);
+			path = OpenWeatherProject;
+			sourceTree = "<group>";
+		};
+		443A3E1A2C25654600C426FD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4411F09B2C12F61600878AFE /* Weather.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		443A3E1B2C25655000C426FD /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				4411F0932C1165B100878AFE /* APIKey.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		443A3E1C2C25655D00C426FD /* Application */ = {
+			isa = PBXGroup;
+			children = (
 				4411F07D2C11649600878AFE /* AppDelegate.swift */,
 				4411F07F2C11649600878AFE /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		443A3E1D2C25656D00C426FD /* Main */ = {
+			isa = PBXGroup;
+			children = (
 				4411F0812C11649600878AFE /* ViewController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		443A3E1E2C25657E00C426FD /* Resource */ = {
+			isa = PBXGroup;
+			children = (
 				4411F0862C11649700878AFE /* Assets.xcassets */,
 				4411F0882C11649700878AFE /* LaunchScreen.storyboard */,
 				4411F08B2C11649700878AFE /* Info.plist */,
-				4411F0932C1165B100878AFE /* APIKey.swift */,
-				4411F09B2C12F61600878AFE /* Weather.swift */,
 			);
-			path = OpenWeatherProject;
+			path = Resource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -310,7 +350,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9M37U587ZT;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = OpenWeatherProject/Info.plist;
+				INFOPLIST_FILE = OpenWeatherProject/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -342,7 +382,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9M37U587ZT;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = OpenWeatherProject/Info.plist;
+				INFOPLIST_FILE = OpenWeatherProject/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
